@@ -8,9 +8,14 @@ local function openShopGui(otherpart)
 	if not player then return end
 	local PGUI = player.PlayerGui
 	local PShopGui = PGUI:WaitForChild("shop")
-	--print(PShopGui.Name)
-	PShopGui.Enabled = true		
-	--print(PShopGui.Enabled)
+	-- when click exit button
+	if PShopGui:GetAttribute("dalay") then
+		wait(2)
+		PShopGui.Enabled = true	
+	else
+		PShopGui.Enabled = true
+	end
+	PShopGui:SetAttribute("dalay", false)
 end
 
 -- close shop gui / when touched ground
@@ -20,7 +25,6 @@ local function closeShopGui(otherpart)
 	local PGUI = player.PlayerGui
 	local PShopGui = PGUI:WaitForChild("shop")
 	PShopGui.Enabled = false
-	--print(PShopGui.Enabled)
 end
 
 shopGUIRange.Touched:Connect(openShopGui)
